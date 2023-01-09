@@ -8,10 +8,10 @@
         <version>3.0.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>ru.javaops</groupId>
-    <artifactId>topjava-boot</artifactId>
+    <groupId>ru.timmax</groupId>
+    <artifactId>restaurant_voting_boot</artifactId>
     <version>1.0</version>
-    <name>TopJava Boot</name>
+    <name>Restaurant voting Boot</name>
     <description>Calories Management application (TopJava) Spring Boot migration</description>
 
     <properties>
