@@ -27,11 +27,13 @@ public class ProfileRestaurantController extends AbstractRestaurantController {
     // cRud
 
     // Read
+    @Override
     @GetMapping
     public List<Restaurant> getAll(@AuthenticationPrincipal AuthUser authUser) {
         return super.getAll(authUser);
     }
 
+    @Override
     @GetMapping("/{id}")
     public ResponseEntity<Restaurant> get(@AuthenticationPrincipal AuthUser authUser, @PathVariable int id) {
         return super.get(authUser, id);

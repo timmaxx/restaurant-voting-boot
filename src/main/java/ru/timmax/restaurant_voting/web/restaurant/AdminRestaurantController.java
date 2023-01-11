@@ -31,7 +31,7 @@ public class AdminRestaurantController extends AbstractRestaurantController {
     }
 
 
-    // CrUD
+    // CRUD
 
     // Create
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -47,11 +47,13 @@ public class AdminRestaurantController extends AbstractRestaurantController {
     }
 
     // Read
+    @Override
     @GetMapping
     public List<Restaurant> getAll(@AuthenticationPrincipal AuthUser authUser) {
         return super.getAll(authUser);
     }
 
+    @Override
     @GetMapping("/{id}")
     public ResponseEntity<Restaurant> get(@AuthenticationPrincipal AuthUser authUser, @PathVariable int id) {
         return super.get(authUser, id);
