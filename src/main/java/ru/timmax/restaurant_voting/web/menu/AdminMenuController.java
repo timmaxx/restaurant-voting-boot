@@ -25,7 +25,7 @@ import static ru.timmax.restaurant_voting.util.validation.ValidationUtil.checkNe
 @RequestMapping(value = AdminMenuController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
 public class AdminMenuController extends AbstractMenuController {
-    static final String REST_URL = "/api/admin/menu";
+    static final String REST_URL = "/api/admin/menus";
 
     @Autowired
     protected RestaurantRepository restaurantRepository;
