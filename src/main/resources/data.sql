@@ -22,3 +22,10 @@ VALUES ('2020-01-30 10:00:00', 'Завтрак', 500, 1),
 INSERT INTO RESTAURANT (name)
 VALUES ('Ресторан А'),
        ('Ресторан Б');
+
+--INSERT INTO MENU (restaurant_id, m_date)
+INSERT INTO MENU (restaurant_id, mdate)
+VALUES (1, '2022-01-08'),
+       (1, '2022-01-09'),
+       (2, '2022-01-08'),
+       (2, '2022-01-09');
