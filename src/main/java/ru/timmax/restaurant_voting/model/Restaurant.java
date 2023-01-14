@@ -9,7 +9,10 @@ import ru.timmax.restaurant_voting.HasId;
 import java.util.List;
 
 @Entity
-@Table(name = "restaurant", uniqueConstraints = {@UniqueConstraint(columnNames = {"name"}, name = "restaurant_unique_name_idx")})
+@Table(name = "restaurant",
+        uniqueConstraints = {@UniqueConstraint(
+                columnNames = {"name"},
+                name = "restaurant_unique_name_idx")})
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -19,7 +22,7 @@ public class Restaurant extends NamedEntity implements HasId {
     //@OrderBy("m_date")
     @OrderBy("mdate")
     @OnDelete(action = OnDeleteAction.CASCADE) //https://stackoverflow.com/a/44988100/548473
-    List<Menu> menus;
+    List<MenuItem> menuItems;
 
     public Restaurant(String name) {
         super(null, name);

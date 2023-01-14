@@ -1,4 +1,4 @@
-package ru.timmax.restaurant_voting.web.menu;
+package ru.timmax.restaurant_voting.web.menu_item;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -9,23 +9,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import ru.timmax.restaurant_voting.model.Menu;
-import ru.timmax.restaurant_voting.model.Restaurant;
+import ru.timmax.restaurant_voting.model.MenuItem;
 import ru.timmax.restaurant_voting.repository.RestaurantRepository;
 import ru.timmax.restaurant_voting.web.AuthUser;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 import static ru.timmax.restaurant_voting.util.validation.ValidationUtil.assureIdConsistent;
 import static ru.timmax.restaurant_voting.util.validation.ValidationUtil.checkNew;
 
 @RestController
-@RequestMapping(value = AdminMenuController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = AdminMenuItemController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
-public class AdminMenuController extends AbstractMenuController {
-    static final String REST_URL = "/api/admin/menus";
+public class AdminMenuItemController extends AbstractMenuItemController {
+    static final String REST_URL = "/api/admin/menu_items";
 
     @Autowired
     protected RestaurantRepository restaurantRepository;
@@ -34,23 +32,19 @@ public class AdminMenuController extends AbstractMenuController {
 
     // Create
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Menu> createWithLocation(
+    public ResponseEntity<MenuItem> createWithLocation(
             @AuthenticationPrincipal AuthUser authUser,
-            @Valid @RequestBody Menu menu) {
+            @Valid @RequestBody MenuItem menuItem) {
         int userId = authUser.id();
-        log.info("create {} for user {}", menu, userId);
-        checkNew(menu);
+        log.info("create {} for user {}", menuItem, userId);
+        checkNew(menuItem);
+        /*
         //
-        /*if ( menu.getRestaurant() == null) {
-            ; // Не вызывался конструктор для ресторана.
-        }*/
-        Optional<Restaurant> optionalRestaurant = restaurantRepository.getByName( menu.getRestaurant().getName(), userId);
-        /*if (optionalRestaurant.isEmpty()) {
-            ; // Не найден ресторан с таким именем.
-        }*/
-        menu.setRestaurant( optionalRestaurant.get());
+        Optional<Menu> optionalMenu = menuRepository.getByName( menuItem.getRestaurant().getName(), userId);
+        menuItem.setRestaurant( optionalMenu.get());
         //
-        Menu created = service.save(menu, userId);
+        */
+        MenuItem created = service.save(menuItem, userId);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
@@ -60,13 +54,15 @@ public class AdminMenuController extends AbstractMenuController {
     // Read
     @Override
     @GetMapping
-    public List<Menu> getAll(@AuthenticationPrincipal AuthUser authUser) {
+    public List<MenuItem> getAll(@AuthenticationPrincipal AuthUser authUser) {
         return super.getAll(authUser);
     }
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<Menu> get(@AuthenticationPrincipal AuthUser authUser, @PathVariable int id) {
+    public ResponseEntity<MenuItem> get(
+            @AuthenticationPrincipal AuthUser authUser,
+            @PathVariable int id) {
         return super.get(authUser, id);
     }
 
@@ -74,12 +70,12 @@ public class AdminMenuController extends AbstractMenuController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@AuthenticationPrincipal AuthUser authUser,
-                       @Valid @RequestBody Menu menu,
+                       @Valid @RequestBody MenuItem menuItem,
                        @PathVariable int id) {
         int userId = authUser.id();
-        log.info("update {} for user {}", menu, userId);
-        assureIdConsistent(menu, id);
-        service.save(menu, userId);
+        log.info("update {} for user {}", menuItem, userId);
+        assureIdConsistent(menuItem, id);
+        service.save(menuItem, userId);
     }
 
     // Delete

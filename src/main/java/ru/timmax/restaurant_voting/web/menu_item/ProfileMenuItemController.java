@@ -1,4 +1,4 @@
-package ru.timmax.restaurant_voting.web.menu;
+package ru.timmax.restaurant_voting.web.menu_item;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -8,29 +8,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.timmax.restaurant_voting.model.Menu;
+import ru.timmax.restaurant_voting.model.MenuItem;
 import ru.timmax.restaurant_voting.web.AuthUser;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(value = ProfileMenuController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = ProfileMenuItemController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
-public class ProfileMenuController extends AbstractMenuController {
-    static final String REST_URL = "/api/profile/menus";
+public class ProfileMenuItemController extends AbstractMenuItemController {
+    static final String REST_URL = "/api/profile/menu_items";
 
     // cRud
 
     // Read
     @Override
     @GetMapping
-    public List<Menu> getAll(@AuthenticationPrincipal AuthUser authUser) {
+    public List<MenuItem> getAll(@AuthenticationPrincipal AuthUser authUser) {
         return super.getAll(authUser);
     }
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<Menu> get(@AuthenticationPrincipal AuthUser authUser, @PathVariable int id) {
+    public ResponseEntity<MenuItem> get(
+            @AuthenticationPrincipal AuthUser authUser,
+            @PathVariable int id) {
         return super.get(authUser, id);
     }
 }
