@@ -22,13 +22,15 @@ import org.springframework.context.annotation.Configuration;
                 title = "REST API documentation",
                 version = "1.0",
                 description = """
-                        Calories Management application (<a href='https://javaops.ru/view/topjava'>TopJava</a>) Spring Boot migration
-                        <p><b>Тестовые креденшелы:</b><br>
+                        Voting system for deciding where to have lunch.
+                        <p><b>Test credentials:</b><br>
                         - user@yandex.ru / password<br>
                         - admin@gmail.com / admin<br>
                         - guest@gmail.com / guest</p>
+                        
+                        This tutorial project is based on the TopJava (<a href='https://javaops.ru/view/topjava'>TopJava</a>).   
                         """,
-                contact = @Contact(url = "https://javaops.ru/#contacts", name = "Grigory Kislin", email = "admin@javaops.ru")
+                contact = @Contact( name = "Maksim Timchenko", email = "m.n.timchenko@gmail.com")
         ),
         security = @SecurityRequirement(name = "basicAuth")
 )
